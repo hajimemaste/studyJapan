@@ -80,19 +80,20 @@ function App() {
     "ぺ",
     "ぽ",
   ];
+
   const [text, setText] = useState(0);
   const [level, setLevel] = useState(1);
 
   const actionText = (action) => {
     switch (action) {
       case "up":
-        if (text < level * 5 - 1) {
+        if (text < level - 1) {
           setText(text + 1);
         }
         break;
       case "random":
-        if (text != Math.floor(Math.random() * (level * 5))) {
-          setText(Math.floor(Math.random() * (level * 5)));
+        if (text != Math.floor(Math.random() * level)) {
+          setText(Math.floor(Math.random() * level));
         }
         break;
       case "down":
@@ -103,7 +104,15 @@ function App() {
     }
   };
   const levelValue = (e) => {
-    setLevel(parseInt(e.target.value));
+    if (parseInt(e.target.value) < 10 && parseInt(e.target.value) > 7) {
+      setLevel(parseInt(e.target.value) * 5 - 2);
+      console.log(1);
+    } else if (parseInt(e.target.value) >= 10) {
+      setLevel(parseInt(e.target.value) * 5 - 4);
+      console.log(10);
+    } else {
+      setLevel(parseInt(e.target.value) * 5);
+    }
   };
   return (
     <>
@@ -126,6 +135,11 @@ function App() {
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
             </select>
             <button onClick={() => setText(0)}>Start</button>
           </div>
